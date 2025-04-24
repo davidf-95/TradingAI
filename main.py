@@ -1,22 +1,28 @@
+# main.py
 import streamlit as st
 from FavoritenListe import show_favorites_page
 from SpreadAnalyse import show_spread_page
 from KorrelationsAnalyse import show_correlation_page
+from MachineLearning import show_ai_prognosen_page  # Neue Import
 
 # --- Seitenkonfiguration ---
-st.set_page_config(layout="wide")  # Dies muss der erste Streamlit-Befehl sein!
+st.set_page_config(layout="wide")
 
-# --- Sidebar für Navigation ---
+# --- Navigation ---
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Gehe zu", ["Spread Analyse", "Korrelationsanalyse", "Favoriten", "Machine Learning"])
+page = st.sidebar.radio("Gehe zu", [
+    "Spread Analyse", 
+    "Korrelationsanalyse", 
+    "Favoriten",
+    "AI Prognosen"  # Neue Option
+])
 
-# --- Hauptteil der Anwendung ---
+# --- Hauptteil ---
 if page == "Favoriten":
     show_favorites_page()
 elif page == "Spread Analyse":
     show_spread_page()
 elif page == "Korrelationsanalyse":
     show_correlation_page()
-elif page == "Machine Learning":
-    st.header("Machine Learning (Coming Soon)")
-    st.write("This section will be implemented later.")
+elif page == "AI Prognosen":
+    show_ai_prognosen_page()  # Neue Seite

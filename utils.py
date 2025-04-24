@@ -13,11 +13,18 @@ def get_kline_data(symbol, interval='1h', limit=500):
     params = {'symbol': symbol, 'interval': interval, 'limit': limit}
     response = requests.get(url, params=params)
     data = response.json()
-    df = pd.DataFrame(data, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore'])
+    df = pd.DataFrame(data, columns=[
+        'timestamp', 'open', 'high', 'low', 'close', 'volume',
+        'close_time', 'quote_asset_volume', 'number_of_trades',
+        'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore'
+    ])
     df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
     df.set_index('timestamp', inplace=True)
-    df['close'] = df['close'].astype(float)
-    return df[['close']]
+    numeric_cols = ['open', 'high', 'low', 'close', 'volume']
+    for col in numeric_cols:
+        if col in df.columns:
+            df[col] = df[col].astype(float)
+    return df  # Jetzt mit allen Spalten zurückgeben
 
 @st.cache_data(ttl=3600)
 def get_all_usdt_pairs():
