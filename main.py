@@ -1,12 +1,18 @@
 # main.py
 import streamlit as st
+
+# --- Seitenkonfiguration (MUSS das erste Streamlit-Kommando sein) ---
+st.set_page_config(
+    layout="wide",
+    page_title="Trading Analysen",
+    page_icon="📊",
+    initial_sidebar_state="expanded"
+)
+
 from FavoritenListe import show_favorites_page
 from SpreadAnalyse import show_spread_page
 from KorrelationsAnalyse import show_correlation_page
-from MachineLearning import show_ai_prognosen_page  # Neue Import
-
-# --- Seitenkonfiguration ---
-st.set_page_config(layout="wide")
+from MachineLearning import show_ai_prognosen_page
 
 # --- Navigation ---
 st.sidebar.title("Navigation")
@@ -14,7 +20,7 @@ page = st.sidebar.radio("Gehe zu", [
     "Spread Analyse", 
     "Korrelationsanalyse", 
     "Favoriten",
-    "AI Prognosen"  # Neue Option
+    "AI Prognosen"
 ])
 
 # --- Hauptteil ---
@@ -25,4 +31,4 @@ elif page == "Spread Analyse":
 elif page == "Korrelationsanalyse":
     show_correlation_page()
 elif page == "AI Prognosen":
-    show_ai_prognosen_page()  # Neue Seite
+    show_ai_prognosen_page()
