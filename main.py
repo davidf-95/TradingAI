@@ -1,11 +1,17 @@
 # main.py
 import streamlit as st
+#from NewsSources import NewsAggregator
+
+
+# Display in Streamlit
+#st.dataframe(news_df)
+
 
 # --- Seitenkonfiguration (MUSS das erste Streamlit-Kommando sein) ---
 st.set_page_config(
     layout="wide",
     page_title="Trading Analysen",
-    page_icon="📊",
+    page_icon="📈",
     initial_sidebar_state="expanded"
 )
 
